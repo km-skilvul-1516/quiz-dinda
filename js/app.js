@@ -12,15 +12,14 @@ let questionCounter = 0;
 let currentQuestion;
 let availableQuestions = [];
 let availableOptions = [];
-let availableOptions = [];
 let correctAnswers = 0;
 let attempt = 0;
 
 //push the question into availableQuestion Array
 function setAvailableQuestions() {
     const totalQuestion = quiz.length;
-    for (let i = 0; i < totalQuestion; i++){
-     availableQuestions.push(quiz[i])   
+    for (let i = 0; i < totalQuestion; i++) {
+        availableQuestions.push(quiz[i])
     }
 }
 
@@ -43,13 +42,13 @@ function getNewQuestion() {
     //get the length of options
     const optionLen = currentQuestion.options.length
     //push option into availableOption Array
-    for (let i = 0; i<optionLen; i++){
+    for (let i = 0; i < optionLen; i++) {
         availableOptions.push(i)
     }
     optionContainer.innerHTML = '';
     let animationDelay = 0.15;
     //create option in HTML
-    for (let i = 0; i<optionLen; i++){
+    for (let i = 0; i < optionLen; i++) {
         //random option
         const optionIndex = availableOptions[Math.floor(Math.random() * availableOptions.length)];
         //get the posisition of optionIndex from the availableOption array 
@@ -70,9 +69,9 @@ function getNewQuestion() {
 }
 
 //get the result of current attempt question
-function getResult(element){
+function getResult(element) {
     const id = parseInt(element.id);
-   //get the answer by ccomparing the id of clicked option 
+    //get the answer by ccomparing the id of clicked option 
     if (id === currentQuestion.answer) {
         //set the green color to the correct option
         element.classList.add("correct");
@@ -88,36 +87,36 @@ function getResult(element){
 
         //if the answer is incorrect the show the correct option by adding color the correct option
         const optionLen = optionContainer.children.length;
-        for (let i-0; i < optionLen; i++)
-            if(parseInt(optionContainer.children[i], id) === currentQuestion.answer){
+        for (let i = 0; i < optionLen; i++)
+            if (parseInt(optionContainer.children[i], id) === currentQuestion.answer) {
                 optionContainer.children[i].classList.add("correct");
             }
-        }
+    }
+    attempt++;
+    unclickableOption();
 }
-    
-attempt++;
-unclickableOption();
-}
+
+
 
 //make all the option unclickeable once the user select an option (Restrict the user to change the answer)
 function unclickableOption() {
     const optionLen = optionContainer.children.length;
-    for (; et i = 0; i < optionLen; i++) {
+    for (let i = 0; i < optionLen; i++) {
         optionContainer.children[i].classList.add("already-answered");
-    }    
+    }
 }
 
 function answerIndicator() {
     answerIndicatorContainer.innerHTML = '';
     const totalQuestion = quiz.length;
-    for (let i = 0; i < totalQuestion; i++){
+    for (let i = 0; i < totalQuestion; i++) {
         const indicator = document.createElement("div");
         answerIndicatorContainer.appendChild(indicator);
     }
 }
 
 function updateAnswerIndicator(markType) {
-    answerIndicatorContainer.children[questionCounter-1].classList.add(markType)
+    answerIndicatorContainer.children[questionCounter - 1].classList.add(markType)
 }
 function next() {
     if (questionCounter === quiz.length) {
@@ -144,7 +143,7 @@ function quizResult() {
     resultBox.querySelector(".total-correct").innerHTML = correctAnswers;
     resultBoX.querySelector(".total-wrong").innerHTML = attempt - correctAnswer;
     const percentage = (correctAnswers / quiz.length) * 100;
-    resultBoX.querySelector(".percentage").innerHTML = percentage.toFixed(2) + %;
+    resultBoX.querySelector(".percentage").innerHTML = percentage.toFixed(2) + "%";
     resultBoX.querySelector(".total-score").innerHTML = correctAnswers + " / " + QUIZ.length;
 }
 
